@@ -79,7 +79,7 @@ SP.initPage({ activeNav:'dashboard', title:'Dashboard' }, (root, ctx) => {
           ${canManage ? `
           <form id="quickAddForm" class="flex gap-8" style="margin-bottom:18px">
             <input type="text" id="qaTitle" placeholder="Quick add a task…" required style="flex:1">
-            <input type="date" id="qaDue" style="width:150px">
+            <input type="month" id="qaDue" style="width:150px">
             <button class="btn btn-primary btn-sm" type="submit">Add</button>
           </form>` : ''}
           <div id="upcomingList">
@@ -91,7 +91,7 @@ SP.initPage({ activeNav:'dashboard', title:'Dashboard' }, (root, ctx) => {
                 <div style="flex:1;min-width:0">
                   <div style="font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${SP.h(t.title)}</div>
                   <div style="font-size:11px;color:var(--muted);margin-top:2px">
-                    ${t.subject_id ? SP.h(subjectName(t.subject_id)) + ' · ' : ''}${t.due_date ? 'Due ' + SP.fmtDate(t.due_date,{month:'short',day:'numeric'}) : 'No due date'}
+                    ${t.subject_id ? SP.h(subjectName(t.subject_id)) + ' · ' : ''}${t.due_date ? 'Due ' + SP.fmtDate(t.due_date,{month:'short',year:'numeric'}) : 'No due date'}
                   </div>
                 </div>
                 <span class="badge pri-${t.priority}">${t.priority}</span>
@@ -129,7 +129,8 @@ SP.initPage({ activeNav:'dashboard', title:'Dashboard' }, (root, ctx) => {
       document.getElementById('quickAddForm').addEventListener('submit', e => {
         e.preventDefault();
         const title = document.getElementById('qaTitle').value.trim();
-        const due = document.getElementById('qaDue').value || null;
+        const qaDueVal = document.getElementById('qaDue').value; // "YYYY-MM" from type="month"
+        const due = qaDueVal ? qaDueVal + '-01' : null;          // stored as "YYYY-MM-01" for compatibility
         if (!title) return;
         const id = ctx.nextId(db, 'tasks');
         db.tasks.push({ id, user_id: user.id, subject_id: null, title, description:'', due_date: due, priority:'medium', status:'pending', completed_at:null });
