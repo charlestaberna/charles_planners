@@ -79,7 +79,7 @@ SP.initPage({ activeNav:'dashboard', title:'Dashboard' }, (root, ctx) => {
           ${canManage ? `
           <form id="quickAddForm" class="flex gap-8" style="margin-bottom:18px">
             <input type="text" id="qaTitle" placeholder="Quick add a task…" required style="flex:1">
-            <input type="date" id="qaDue" style="width:160px">
+            <input type="date" id="qaDue" value="2026-09-14" min="2026-09-01" max="2026-09-30" style="width:160px">
             <button class="btn btn-primary btn-sm" type="submit">Add</button>
           </form>` : ''}
           <div id="upcomingList">
@@ -129,7 +129,7 @@ SP.initPage({ activeNav:'dashboard', title:'Dashboard' }, (root, ctx) => {
       document.getElementById('quickAddForm').addEventListener('submit', e => {
         e.preventDefault();
         const title = document.getElementById('qaTitle').value.trim();
-        const due = document.getElementById('qaDue').value || null; // Stores "YYYY-MM-DD" directly
+        const due = document.getElementById('qaDue').value || null;
         if (!title) return;
         const id = ctx.nextId(db, 'tasks');
         db.tasks.push({ id, user_id: user.id, subject_id: null, title, description:'', due_date: due, priority:'medium', status:'pending', completed_at:null });
