@@ -44,8 +44,7 @@ const SP = (() => {
     return {
       nextId: { users: 3, subjects: 4, tasks: 4, schedule: 6, notes: 2, events: 3, groups: 1, messages: 1, notifications: 1 },
       users: [
-        { id: 1, name: 'System Admin', email: 'admin@gmail.com', password: 'admin123', role: 'admin', is_approved: 1, theme_color: '#1a6cf5', avatar: null, created_at: now, last_seen: now },
-        { id: 2, name: 'Juan Dela Cruz', email: 'juan@gmail.com', password: 'juan123', role: 'student', is_approved: 1, theme_color: '#1a6cf5', avatar: null, created_at: now, last_seen: now }
+        { id: 1, name: 'charles', email: 'charles@gmail.com', password: 'admin123', role: 'admin', is_approved: 1, theme_color: '#1a6cf5', avatar: null, created_at: now, last_seen: now },
       ],
       subjects: [
         { id: 1, user_id: 2, subject_name: 'Web Systems and Technologies', subject_code: 'IT301', instructor: 'Prof. R. Santos', units: 3.0, color: '#1a6cf5' },
